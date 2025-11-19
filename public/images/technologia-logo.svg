@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <style>
+      .tech-orange { fill: #ff6a00; stroke: #ff6a00; }
+      .tech-outline { fill: none; stroke: #ff6a00; stroke-width: 1.5; }
+      .tech-glow { filter: drop-shadow(0 0 4px #ff6a00); }
+    </style>
+  </defs>
+  <rect width="200" height="200" fill="none"/>
+  <circle cx="50" cy="35" r="3" class="tech-orange tech-glow"/>
+  <circle cx="65" cy="25" r="2.5" class="tech-orange"/>
+  <circle cx="75" cy="30" r="2" class="tech-orange"/>
+  <polygon points="45,50 50,40 60,40 65,50 60,60 50,60" class="tech-outline tech-glow"/>
+  <polygon points="70,45 75,35 85,35 90,45 85,55 75,55" class="tech-outline"/>
+  <polygon points="130,50 135,40 145,40 150,50 145,60 135,60" class="tech-outline tech-glow"/>
+  <polygon points="155,45 158,38 165,38 168,45 165,52 158,52" class="tech-outline"/>
+  <line x1="75" y1="20" x2="85" y2="15" class="tech-outline tech-glow"/>
+  <line x1="110" y1="25" x2="125" y2="20" class="tech-outline"/>
+  <rect x="50" y="65" width="100" height="75" rx="8" class="tech-outline tech-glow" stroke-width="2"/>
+  <rect x="80" y="85" width="40" height="40" rx="3" class="tech-outline tech-glow" stroke-width="1.5"/>
+  <circle cx="100" cy="105" r="6" class="tech-outline tech-glow"/>
+  <path d="M 100 99 L 100 95" class="tech-outline tech-glow" stroke-width="1.5"/>
+  <line x1="70" y1="90" x2="80" y2="90" class="tech-outline" stroke-width="1"/>
+  <line x1="70" y1="105" x2="80" y2="105" class="tech-outline" stroke-width="1"/>
+  <line x1="70" y1="120" x2="80" y2="120" class="tech-outline" stroke-width="1"/>
+  <line x1="120" y1="90" x2="130" y2="90" class="tech-outline" stroke-width="1"/>
+  <line x1="120" y1="105" x2="130" y2="105" class="tech-outline" stroke-width="1"/>
+  <line x1="120" y1="120" x2="130" y2="120" class="tech-outline" stroke-width="1"/>
+  <circle cx="75" cy="90" r="1.5" class="tech-orange"/>
+  <circle cx="75" cy="105" r="1.5" class="tech-orange"/>
+  <circle cx="75" cy="120" r="1.5" class="tech-orange"/>
+  <circle cx="125" cy="90" r="1.5" class="tech-orange"/>
+  <circle cx="125" cy="105" r="1.5" class="tech-orange"/>
+  <circle cx="125" cy="120" r="1.5" class="tech-orange"/>
+  <polygon points="55,65 65,50 135,50 145,65" class="tech-outline tech-glow" stroke-width="1.5"/>
+  <line x1="65" y1="50" x2="75" y2="40" class="tech-outline tech-glow" stroke-width="1.2"/>
+  <line x1="135" y1="50" x2="145" y2="40" class="tech-outline" stroke-width="1.2"/>
+  <rect x="60" y="140" width="80" height="8" rx="2" class="tech-outline tech-glow" stroke-width="1.5"/>
+  <circle cx="35" cy="45" r="1.5" class="tech-orange tech-glow"/>
+  <circle cx="165" cy="75" r="1" class="tech-orange"/>
+  <circle cx="45" cy="155" r="1.2" class="tech-orange tech-glow"/>
+  <circle cx="155" cy="140" r="0.8" class="tech-orange"/>
+</svg>

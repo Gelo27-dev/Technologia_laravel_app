@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --color-store-primary: #ff4500;
+        --color-store-secondary: #1a1a1a;
+        --color-store-background: #0d0d0d;
+        --color-store-text: #f0f0f0;
+        --color-store-text-muted: #9ca3af;
+    }
+
+    body {
+        background-color: var(--color-store-background);
+        color: var(--color-store-text);
+    }
+
+    :root {
+        --btn-text-active: #e2e8f0;
+        --nav-text-active: #e2e8f0;
+    }
+}
+
+body.theme-dark {
+    --btn-text-active: #e2e8f0;
+    --nav-text-active: #e2e8f0;
+    --color-store-text-muted: #9ca3af;
+}
+
+body.theme-light {
+    --btn-text-active: #0f172a;
+    --nav-text-active: #0f172a;
+    --color-store-text-muted: #6b7280;
+}
+
+@keyframes pulse-border {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 69, 0, 0.4);
+        border-color: rgba(255, 69, 0, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 10px 5px rgba(255, 69, 0, 0.8);
+        border-color: rgba(255, 69, 0, 1);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 69, 0, 0.4);
+        border-color: rgba(255, 69, 0, 0.4);
+    }
+}
+
+@layer components {
+    .btn-primary {
+        @apply inline-flex items-center px-4 py-3 border border-transparent rounded-lg font-bold text-sm uppercase tracking-wide transition-all duration-200 shadow-lg
+            bg-[var(--color-store-primary)] text-white hover:bg-[#ff5a1a] hover:shadow-xl hover:shadow-orange-500/30 focus:ring focus:ring-[var(--color-store-primary)] focus:ring-opacity-50;
+    }
+
+    .btn-secondary {
+        @apply inline-flex items-center px-4 py-3 border border-gray-600 rounded-lg font-bold text-sm uppercase tracking-wide transition-all duration-200 shadow-lg
+            bg-gray-700 text-gray-200 hover:bg-gray-600 hover:border-gray-500 hover:shadow-xl hover:shadow-gray-500/30 focus:ring focus:ring-gray-500 focus:ring-opacity-50;
+    }
+
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .text-primary-accent {
+        color: var(--color-store-primary);
+    }
+
+    .card-tech {
+        @apply bg-[var(--color-store-secondary)] p-6 rounded-xl shadow-2xl transition duration-300 hover:shadow-[0_0_20px_0_rgba(255,69,0,0.7)] hover:scale-[1.03] transform;
+    }
+
+    .hero-pulse {
+        animation: pulse-border 3s infinite alternate;
+        border-style: solid;
+        border-width: 1px;
+    }
+
+    .btn-animated {
+        transition: transform 220ms cubic-bezier(0.2, 0.9, 0.3, 1),
+            box-shadow 220ms cubic-bezier(0.2, 0.9, 0.3, 1);
+        will-change: transform, box-shadow;
+    }
+
+    .btn-animated:hover:not(:disabled) {
+        transform: translateY(-4px) scale(1.01);
+        box-shadow: 0 14px 28px rgba(15, 23, 42, 0.18),
+            0 6px 10px rgba(15, 23, 42, 0.06);
+    }
+
+    .btn-animated:active {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+    }
+
+    .btn-primary:active,
+    .btn-animated:active,
+    .btn-primary:focus-visible,
+    .btn-animated:focus-visible {
+        color: var(--btn-text-active) !important;
+    }
+
+    .nav-link-animated:active,
+    .nav-link-animated[aria-current="page"] {
+        color: var(--nav-text-active) !important;
+    }
+
+    .nav-link-animated {
+        position: relative;
+        overflow: visible;
+    }
+
+    .nav-link-animated::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -6px;
+        height: 3px;
+        background: linear-gradient(
+            90deg,
+            rgba(255, 69, 0, 1),
+            rgba(255, 107, 53, 0.9)
+        );
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 300ms cubic-bezier(0.2, 0.9, 0.3, 1);
+        border-radius: 4px;
+        pointer-events: none;
+    }
+
+    .nav-link-animated:hover::after,
+    .nav-link-animated[aria-current="page"]::after {
+        transform: scaleX(1);
+    }
+
+    .sidebar-link-animated {
+        transition: transform 280ms cubic-bezier(0.2, 0.9, 0.3, 1),
+            background-color 220ms ease;
+        will-change: transform, background-color;
+    }
+
+    .sidebar-link-animated:hover {
+        transform: translateX(6px);
+        background-color: rgba(255, 69, 0, 0.04);
+    }
+
+    .smooth-interact {
+        transition: background-color 200ms ease, color 200ms ease,
+            border-color 200ms ease, box-shadow 200ms ease;
+    }
+}
