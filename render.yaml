@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: technologia-laravel-app
+    env: docker
+    branch: main
+    dockerfilePath: Dockerfile
+    autoDeploy: true
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: 'false'
+      - key: CACHE_DRIVER
+        value: file
+      - key: SESSION_DRIVER
+        value: cookie
+      - key: QUEUE_CONNECTION
+        value: sync

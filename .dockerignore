@@ -1,0 +1,17 @@
+vendor
+node_modules
+storage/*.key
+storage/app
+storage/debugbar
+storage/framework/cache
+storage/framework/sessions
+storage/framework/views
+storage/logs
+.env
+.env.*
+.git
+.gitignore
+README.md
+Dockerfile
+docker-compose.yml
+vercel.json
