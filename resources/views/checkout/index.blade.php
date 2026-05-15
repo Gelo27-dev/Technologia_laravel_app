@@ -36,14 +36,29 @@
                         <input type="text" name="shipping_phone" value="{{ old('shipping_phone', $user->phone ?? '') }}" class="mt-1 block w-full bg-gray-800 text-white border border-gray-700 rounded-md" required>
                     </div>
 
-                    <div class="md:col-span-2">
-                        <label class="block text-sm font-medium text-white">Address</label>
-                        <input type="text" name="shipping_address" value="{{ old('shipping_address', $user->address ?? '') }}" class="mt-1 block w-full bg-gray-800 text-white border border-gray-700 rounded-md" required>
+                    <div>
+                        <label class="block text-sm font-medium text-white">ZIP / Postal Code</label>
+                        <input type="text" name="shipping_zip" value="{{ old('shipping_zip', $user->zip ?? '') }}" class="mt-1 block w-full bg-gray-800 text-white border border-gray-700 rounded-md" required>
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-white">City</label>
                         <input type="text" name="shipping_city" value="{{ old('shipping_city', $user->city ?? '') }}" class="mt-1 block w-full bg-gray-800 text-white border border-gray-700 rounded-md" required>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-white">Payment Method</label>
+                        <select name="payment_method" class="mt-1 block w-full bg-gray-800 text-white border border-gray-700 rounded-md" required>
+                            <option value="credit_card" @selected(old('payment_method') === 'credit_card')>Credit Card</option>
+                            <option value="paypal" @selected(old('payment_method') === 'paypal')>PayPal</option>
+                            <option value="cash_on_delivery" @selected(old('payment_method') === 'cash_on_delivery')>Cash on Delivery</option>
+                            <option value="bank_transfer" @selected(old('payment_method') === 'bank_transfer')>Bank Transfer</option>
+                        </select>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-white">Address</label>
+                        <input type="text" name="shipping_address" value="{{ old('shipping_address', $user->address ?? '') }}" class="mt-1 block w-full bg-gray-800 text-white border border-gray-700 rounded-md" required>
                     </div>
                 </div>
 

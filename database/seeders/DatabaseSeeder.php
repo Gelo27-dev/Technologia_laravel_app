@@ -13,24 +13,35 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Create the ADMIN USER
-        DB::table('users')->insert([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password'),
-            'is_admin' => 1, // Crucial for your middleware
-            'created_at' => now(),
-            'updated_at' => now(),
+        $this->call([
+            CategorySeeder::class,
+            ProductSeeder::class,
         ]);
 
-        // 2. Create the REGULAR (NON-ADMIN) USER
-        DB::table('users')->insert([
-            'name' => 'Regular User',
-            'email' => 'user@example.com', // <-- Use this email to log in as a regular user
-            'password' => Hash::make('password'), // <-- Use this password
-            'is_admin' => 0, // 0 means not admin
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        // 1. Create or update the ADMIN USER
+        DB::table('users')->updateOrInsert(
+            ['email' => 'angelodelossantostud@gmail.com'],
+            [
+                'name' => 'Angelo de los Santos',
+                'password' => Hash::make('JILORARA27'),
+                'is_admin' => 1,
+                'active' => 1,
+                'updated_at' => now(),
+                'created_at' => now(),
+            ]
+        );
+
+        // 2. Create or update the REGULAR (NON-ADMIN) USER
+        DB::table('users')->updateOrInsert(
+            ['email' => 'user@example.com'],
+            [
+                'name' => 'Regular User',
+                'password' => Hash::make('password'),
+                'is_admin' => 0,
+                'active' => 1,
+                'updated_at' => now(),
+                'created_at' => now(),
+            ]
+        );
     }
 }

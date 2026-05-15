@@ -34,7 +34,9 @@ class CheckoutController extends Controller
             'shipping_name' => 'required|string|max:255',
             'shipping_address' => 'required|string|max:255',
             'shipping_city' => 'required|string|max:255',
-            'shipping_phone' => 'required|string|max:20', 
+            'shipping_zip' => 'required|string|max:20',
+            'shipping_phone' => 'required|string|max:20',
+            'payment_method' => 'required|in:credit_card,paypal,cash_on_delivery,bank_transfer',
         ]);
 
         // 2. Check stock and start a database transaction
@@ -59,7 +61,9 @@ class CheckoutController extends Controller
                 'shipping_name' => $request->shipping_name,
                 'shipping_address' => $request->shipping_address,
                 'shipping_city' => $request->shipping_city,
+                'shipping_zip' => $request->shipping_zip,
                 'shipping_phone' => $request->shipping_phone,
+                'payment_method' => $request->payment_method,
             ]);
 
             // 4. Create the Order Items (pivot table) and update stock

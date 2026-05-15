@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            // Add 'is_admin' column after 'email'
-            // default(0) means 'false' (not an admin)
-            $table->boolean('is_admin')->after('email')->default(0);
+        Schema::table('orders', function (Blueprint $table) {
+            $table->string('payment_method')->nullable()->after('status');
+            $table->string('shipping_zip')->nullable()->after('shipping_city');
         });
     }
 
@@ -23,8 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('is_admin');
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropColumn(['payment_method', 'shipping_zip']);
         });
     }
 };

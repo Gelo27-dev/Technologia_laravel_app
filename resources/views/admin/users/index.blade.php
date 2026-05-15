@@ -16,6 +16,7 @@
                                     <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">ID</th>
                                     <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Name</th>
                                     <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Email</th>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Role</th>
                                     <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-white">Registered</th>
                                     <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Status</th>
                                     <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Actions</th>
@@ -34,6 +35,11 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{{ $index }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[var(--color-store-text)]">{{ $user->name }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-white">{{ $user->email }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                            <span class="px-2 py-1 rounded-full text-xs font-medium {{ $user->is_admin ? 'bg-indigo-900 text-indigo-300' : 'bg-gray-900 text-gray-300' }}">
+                                                {{ $user->is_admin ? 'Admin' : 'User' }}
+                                            </span>
+                                        </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-white">{{ $user->created_at->format('M d, Y') }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm">
                                             <span class="px-2 py-1 rounded-full text-xs font-medium
@@ -53,6 +59,16 @@
                                                     {{ $user->active ? 'Deactivate' : 'Activate' }}
                                                 </button>
                                             </form>
+                                            @if ($user->id !== auth()->id())
+                                                <form method="POST" action="{{ route('admin.users.toggleAdmin', $user) }}" class="inline">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="text-sm transition
+                                                        {{ $user->is_admin ? 'text-yellow-400 hover:text-yellow-300' : 'text-indigo-400 hover:text-indigo-300' }}">
+                                                        {{ $user->is_admin ? 'Remove Admin' : 'Make Admin' }}
+                                                    </button>
+                                                </form>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

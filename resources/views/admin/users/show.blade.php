@@ -20,6 +20,10 @@
                     {{ $user->active ? 'bg-green-900 text-green-300' : 'bg-red-900 text-red-300' }}">
                     {{ $user->active ? 'Active' : 'Inactive' }}
                 </span>
+                <span class="px-3 py-1 rounded-full text-sm font-medium
+                    {{ $user->is_admin ? 'bg-indigo-900 text-indigo-300' : 'bg-gray-900 text-gray-300' }}">
+                    {{ $user->is_admin ? 'Admin' : 'User' }}
+                </span>
                 <form method="POST" action="{{ route('admin.users.toggleActive', $user) }}" class="inline">
                     @csrf
                     @method('PATCH')
@@ -30,6 +34,16 @@
                         {{ $user->active ? 'Deactivate' : 'Activate' }}
                     </button>
                 </form>
+                @if ($user->id !== auth()->id())
+                    <form method="POST" action="{{ route('admin.users.toggleAdmin', $user) }}" class="inline">
+                        @csrf
+                        @method('PATCH')
+                        <button type="submit" class="px-4 py-2 rounded text-sm font-medium transition
+                            {{ $user->is_admin ? 'bg-yellow-600 hover:bg-yellow-700 text-white' : 'bg-indigo-600 hover:bg-indigo-700 text-white' }}">
+                            {{ $user->is_admin ? 'Remove Admin' : 'Make Admin' }}
+                        </button>
+                    </form>
+                @endif
             </div>
         </div>
 
@@ -41,6 +55,10 @@
                         <div class="flex justify-between">
                             <span class="text-gray-400">User ID:</span>
                             <span class="text-white">{{ $user->id }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Role:</span>
+                            <span class="text-white">{{ $user->is_admin ? 'Admin' : 'User' }}</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-400">Email Verified:</span>

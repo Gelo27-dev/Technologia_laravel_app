@@ -29,29 +29,31 @@ class AdminController extends Controller
 
     public function users()
     {
-        $users = User::where('is_admin', 0)->latest()->paginate(20);
+        $users = User::latest()->paginate(20);
         return view('admin.users.index', compact('users'));
     }
 
     public function show(User $user)
     {
-        // Ensure only non-admin users can be viewed
-        if ($user->is_admin) {
-            abort(404);
-        }
-
         return view('admin.users.show', compact('user'));
     }
 
     public function toggleActive(User $user)
     {
-        // Ensure only non-admin users can be toggled
-        if ($user->is_admin) {
-            abort(404);
-        }
-
         $user->update(['active' => !$user->active]);
 
         return redirect()->back()->with('success', 'User status updated successfully.');
+    }
+
+    public function toggleAdmin(User $user)
+    {
+        if ($user->id === auth()->id()) {
+            return redirect()->back()->with('error', 'You cannot change your own admin status.');
+        }
+
+        $user->update(['is_admin' => !$user->is_admin]);
+
+        $status = $user->is_admin ? 'granted' : 'revoked';
+        return redirect()->back()->with('success', "Admin privileges {$status} for {$user->name}.");
     }
 }

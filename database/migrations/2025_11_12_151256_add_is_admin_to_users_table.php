@@ -9,8 +9,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            // Adds a boolean column, defaulting to false (not admin)
-            $table->boolean('is_admin')->default(false)->after('password');
+            
+        $table->boolean('is_admin')->after('email')->default(0);
+
         });
     }
 

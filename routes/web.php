@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 
+
 Route::get('/', function () {
     $featuredProducts = \App\Models\Product::with('category')->latest()->take(12)->get();
     return view('welcome', compact('featuredProducts'));
@@ -75,6 +76,7 @@ Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])->prefix
     Route::get('/users', [AdminController::class, 'users'])->name('users.index');
     Route::get('/users/{user}', [AdminController::class, 'show'])->name('users.show');
     Route::patch('/users/{user}/toggle-active', [AdminController::class, 'toggleActive'])->name('users.toggleActive');
+    Route::patch('/users/{user}/toggle-admin', [AdminController::class, 'toggleAdmin'])->name('users.toggleAdmin');
 
     // Orders
     Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders.index');
@@ -84,3 +86,64 @@ Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])->prefix
 });
 
 require __DIR__.'/auth.php';
+
+// Temporary route to make a user admin for Angelo Tud
+use App\Models\User;
+use Illuminate\Http\Request;
+
+Route::get('/temp/make-admin', function(Request $request) {
+    $email = $request->query('email');
+    $secret = $request->query('secret');
+
+    // Replace this with a secret key only you know
+    $expectedSecret = 'temporarySecureKey123';
+
+    if ($secret !== $expectedSecret) {
+        return response('Unauthorized', 401);
+    }
+
+    if (!$email) {
+        return response('Email is required', 400);
+    }
+
+    $user = User::where('email', $email)->first();
+    if (!$user) {
+        return response('User not found', 404);
+    }
+
+    $user->is_admin = 1;
+    $user->save();
+
+    return response("User {$user->name} ({$user->email}) is now an admin.");
+});
+
+Route::get('/temp/create-admin', function(Request $request) {
+    $name = $request->query('name');
+    $email = $request->query('email');
+    $password = $request->query('password');
+    $secret = $request->query('secret');
+
+    $expectedSecret = 'temporarySecureKey123';
+
+    if ($secret !== $expectedSecret) {
+        return response('Unauthorized', 401);
+    }
+
+    if (!$name || !$email || !$password) {
+        return response('Name, email and password are required', 400);
+    }
+
+    $existingUser = User::where('email', $email)->first();
+    if ($existingUser) {
+        return response('User with this email already exists', 409);
+    }
+
+    $user = new User();
+    $user->name = $name;
+    $user->email = $email;
+    $user->password = bcrypt($password);
+    $user->is_admin = 1;
+    $user->save();
+
+    return response("New admin user {$user->name} ({$user->email}) created successfully.");
+});
